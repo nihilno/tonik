@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as functions_rounds from "../functions/rounds.js";
 import type * as functions_users from "../functions/users.js";
 import type * as seed from "../seed.js";
 
@@ -18,6 +19,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  "functions/rounds": typeof functions_rounds;
   "functions/users": typeof functions_users;
   seed: typeof seed;
 }>;

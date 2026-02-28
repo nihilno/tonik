@@ -4,7 +4,7 @@ import React from "react";
 function Spinner({ children }: { children?: React.ReactNode }) {
   return (
     <section className="flex flex-col items-center gap-4">
-      <Loader className="animate-spin size-8" />
+      <Loader className="animate-spin size-6" />
       {children}
     </section>
   );

@@ -21,7 +21,7 @@ function IntroCard() {
     <Card className="text-center">
       <CardHeader>
         <CardTitle className="font-light">
-          <h1 className="text-xl">Welcome, {user?.name ?? "Guest"}</h1>
+          <span className="text-xl">Welcome, {user?.name ?? "Guest"}</span>
         </CardTitle>
         <CardDescription>Get ready for the game.</CardDescription>
       </CardHeader>
