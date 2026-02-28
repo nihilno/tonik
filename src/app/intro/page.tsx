@@ -6,8 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CircleCheck } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Introduction",
@@ -15,16 +16,18 @@ export const metadata: Metadata = {
 
 export default function IntroPage() {
   return (
-    <Card>
+    <Card className="text-center">
       <CardHeader>
         <CardTitle className="font-light">
           <h1 className="text-xl">Welcome, Maciej</h1>
-          <CardDescription>Get ready for the game.</CardDescription>
         </CardTitle>
+        <CardDescription>Get ready for the game.</CardDescription>
       </CardHeader>
-      <CardContent className=" space-y-3">
-        <Button type="submit" size="lg" className="w-full text-lg">
-          Start Game <CircleCheck className="size-5" />
+      <CardContent className="space-y-3 ">
+        <Button type="button" asChild size="lg" className="w-full text-lg">
+          <Link href="/game">
+            Start Game <ChevronRight className="size-5" />
+          </Link>
         </Button>
       </CardContent>
     </Card>

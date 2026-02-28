@@ -2,9 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { CircleX } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Game",
@@ -29,14 +30,16 @@ export default function GamePage() {
             />
             <Separator className="my-8" />
           </section>
-          <Button type="button" size="lg" className="w-full text-lg">
-            <CircleX className="size-5" />
-            End Game
+          <Button type="button" asChild size="lg" className="w-full text-lg">
+            <Link href="/intro">
+              <ChevronLeft className="size-5" />
+              End Game
+            </Link>
           </Button>
         </CardContent>
       </Card>
 
-      <h1>Table will be here</h1>
+      <p>Table will be here</p>
     </section>
   );
 }
