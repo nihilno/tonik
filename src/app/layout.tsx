@@ -1,4 +1,4 @@
-import { ConvexClientProvider } from "@/components/convex-client-provider";
+import Providers from "@/components/providers";
 import { inter } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -26,9 +26,9 @@ export default function RootLayout({
           "antialiased grid place-items-center min-h-dvh px-2",
         )}
       >
-        <ConvexClientProvider>
+        <Providers>
           <main>{children}</main>
-        </ConvexClientProvider>
+        </Providers>
       </body>
     </html>
   );
