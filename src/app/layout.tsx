@@ -23,7 +23,7 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          "antialiased grid place-items-center min-h-dvh px-2",
+          "antialiased grid place-items-center min-h-dvh px-2 translate-y-32",
         )}
       >
         <Providers>

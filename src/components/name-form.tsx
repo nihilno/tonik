@@ -1,5 +1,6 @@
 "use client";
 
+import { useCheckStorage } from "@/hooks/use-check-storage";
 import { useMutation } from "convex/react";
 import { CirclePlus } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,9 @@ function NameForm() {
   const { replace } = useRouter();
   const getOrCreateUser = useMutation(api.functions.users.getOrCreateUser);
 
+  useCheckStorage();
+
+  // dodawanie użytkownika
   async function onSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
