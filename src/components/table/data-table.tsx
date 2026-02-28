@@ -11,6 +11,8 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
@@ -30,14 +32,18 @@ export function DataTable({
     data: participants,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getCoreRowModel(),
-    rowCount: 4,
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: 4,
+      },
+    },
     onSortingChange: setSorting,
     state: {
       sorting,
     },
   });
-
   return (
     <>
       <div className="overflow-hidden rounded-md border">

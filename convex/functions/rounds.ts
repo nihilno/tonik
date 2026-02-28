@@ -66,3 +66,31 @@ export const getCurrentRound = query({
     };
   },
 });
+
+export const joinRound = mutation({
+  args: {
+    roundId: v.id("rounds"),
+    userId: v.id("users"),
+  },
+  handler: async ({ db }, { roundId, userId }) => {
+    const existing = await db
+      .query("roundParticipants")
+      .withIndex("by_round_user", (q) =>
+        q.eq("roundId", roundId).eq("userId", userId),
+      )
+      .first();
+
+    if (existing) return existing._id;
+
+    return await db.insert("roundParticipants", {
+      roundId,
+      userId,
+      typedText: "",
+      wpm: 0,
+      accuracy: 1,
+      totalTyped: 0,
+      totalMistakes: 0,
+      finishedAt: undefined, // MUST be undefined, not null
+    });
+  },
+});

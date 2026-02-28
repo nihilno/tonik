@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function GamePage() {
   return (
     <section className="space-y-8">
-      <Card>
+      <Card className="min-w-2xl! min-h-100 grid place-items-center">
         <GameCard />
       </Card>
       <TableWrapper />

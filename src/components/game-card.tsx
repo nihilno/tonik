@@ -1,10 +1,12 @@
 "use client";
 
 import { useGame } from "@/hooks/use-game";
+import { useJoinRound } from "@/hooks/use-join-round";
 import { useNow } from "@/hooks/use-now";
 import { useRound } from "@/hooks/use-round";
 import { useTypingProgress } from "@/hooks/use-typing-progress";
 import { useUser } from "@/hooks/use-user";
+import { renderTypingProgress } from "@/lib/render-typing-progress";
 import { CheckCircle, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -22,6 +24,9 @@ function GameCard() {
 
   // podłączenie hooka do śledzenia postępu pisania
   const { input, setInput, finished } = useTypingProgress(round, user);
+
+  // dołączanie do rundy, gdy się pojawi
+  useJoinRound(round, user);
 
   // nowa runda jest tworzona, gdy aktualna się kończy
   useEffect(() => {
@@ -50,7 +55,7 @@ function GameCard() {
           Time left: {remainingSeconds}s
         </p>
         <h1 className="select-none font-light text-3xl max-w-[30ch] mt-8">
-          {round.sentence}
+          {renderTypingProgress(round.sentence, input)}
         </h1>
         <Separator className="my-8" />
         {finished ? (
