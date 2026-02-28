@@ -1,3 +1,4 @@
+import { ConvexClientProvider } from "@/components/convex-client-provider";
 import { inter } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -19,7 +20,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "antialiased")}>{children}</body>
+      <body
+        className={cn(
+          inter.className,
+          "antialiased grid place-items-center min-h-dvh px-2",
+        )}
+      >
+        <ConvexClientProvider>
+          <main>{children}</main>
+        </ConvexClientProvider>
+      </body>
     </html>
   );
 }
