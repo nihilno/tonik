@@ -31,5 +31,7 @@ export default defineSchema({
 
     totalTyped: v.number(), // dla lepszego obliczenia accuracy
     totalMistakes: v.number(), // dla lepszego obliczenia accuracy
-  }),
+  })
+    .index("by_round_user", ["roundId", "userId"])
+    .index("by_round", ["roundId"]),
 });

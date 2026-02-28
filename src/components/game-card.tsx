@@ -3,9 +3,11 @@
 import { useGame } from "@/hooks/use-game";
 import { useNow } from "@/hooks/use-now";
 import { useRound } from "@/hooks/use-round";
+import { useTypingProgress } from "@/hooks/use-typing-progress";
 import { useUser } from "@/hooks/use-user";
-import { ChevronLeft } from "lucide-react";
+import { CheckCircle, ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
 import Spinner from "./loader";
 import { Button } from "./ui/button";
 import { CardContent } from "./ui/card";
@@ -14,9 +16,21 @@ import { Separator } from "./ui/separator";
 
 function GameCard() {
   const { user } = useUser();
-  const { gameId } = useGame(user);
+  const { gameId, getOrCreateGameWithActiveRound } = useGame(user);
   const { round } = useRound(gameId);
   const now = useNow(200);
+
+  // podłączenie hooka do śledzenia postępu pisania
+  const { input, setInput, finished } = useTypingProgress(round, user);
+
+  // nowa runda jest tworzona, gdy aktualna się kończy
+  useEffect(() => {
+    if (!round || !gameId) return;
+    const remainingMs = round.endsAt - now;
+    if (remainingMs <= 0) {
+      getOrCreateGameWithActiveRound();
+    }
+  }, [round, now, gameId, getOrCreateGameWithActiveRound]);
 
   if (!user) return null;
   if (!gameId) return <Spinner>Initializing game...</Spinner>;
@@ -25,6 +39,9 @@ function GameCard() {
   // kalulowanie pozostałego czasu
   const remainingMs = round.endsAt - now;
   const remainingSeconds = Math.max(0, Math.ceil(remainingMs / 1000));
+
+  // wyłączamy input, jeśli runda się skończyła lub gracz już ukończył pisanie
+  const isDisabled = finished || remainingSeconds <= 0;
 
   return (
     <CardContent>
@@ -36,12 +53,21 @@ function GameCard() {
           {round.sentence}
         </h1>
         <Separator className="my-8" />
-        <Input
-          key={round.roundId}
-          placeholder="Zacznij pisać..."
-          className="h-16 text-2xl! rounded-full text-center"
-          autoFocus
-        />
+        {finished ? (
+          <span className="h-16  w-full">
+            <CheckCircle className="size-full" />
+          </span>
+        ) : (
+          <Input
+            key={round.roundId}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            disabled={isDisabled}
+            placeholder="Zacznij pisać..."
+            className="h-16 text-2xl! rounded-full text-center"
+            autoFocus
+          />
+        )}
         <Separator className="my-8" />
       </section>
       <Button type="button" asChild size="lg" className="w-full text-lg">
