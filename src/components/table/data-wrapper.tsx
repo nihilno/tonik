@@ -13,6 +13,7 @@ function TableWrapper() {
   const { round } = useRound(gameId);
   const participants = useParticipants(round?.roundId ?? null);
 
+  if (!gameId || !round || !participants) return null;
   return <DataTable participants={participants} columns={columns} />;
 }
 

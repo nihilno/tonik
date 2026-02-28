@@ -3,7 +3,7 @@ export function renderTypingProgress(sentence: string, input: string) {
     const typedChar = input[i];
 
     let className = "";
-    if (typedChar == null) className = "text-muted-foreground ";
+    if (typedChar == null) className = "text-foreground";
     else if (typedChar === char) className = "text-green-700 font-semibold";
     else className = "text-red-700 font-semibold";
 
