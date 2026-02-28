@@ -9,6 +9,7 @@
  */
 
 import type * as functions_progress from "../functions/progress.js";
+import type * as functions_roundParticipants from "../functions/roundParticipants.js";
 import type * as functions_rounds from "../functions/rounds.js";
 import type * as functions_users from "../functions/users.js";
 import type * as seed from "../seed.js";
@@ -21,6 +22,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   "functions/progress": typeof functions_progress;
+  "functions/roundParticipants": typeof functions_roundParticipants;
   "functions/rounds": typeof functions_rounds;
   "functions/users": typeof functions_users;
   seed: typeof seed;

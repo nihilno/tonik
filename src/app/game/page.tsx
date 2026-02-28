@@ -1,6 +1,7 @@
 import GameCard from "@/components/game-card";
 import { Card } from "@/components/ui/card";
 
+import TableWrapper from "@/components/table/data-wrapper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,8 +14,7 @@ export default function GamePage() {
       <Card>
         <GameCard />
       </Card>
-
-      <p>Table will be here</p>
+      <TableWrapper />
     </section>
   );
 }

@@ -63,8 +63,8 @@ function GameCard() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={isDisabled}
-            placeholder="Zacznij pisać..."
-            className="h-16 text-2xl! rounded-full text-center"
+            placeholder="Start typing..."
+            className="h-16 text-2xl! rounded-full text-center font-light"
             autoFocus
           />
         )}

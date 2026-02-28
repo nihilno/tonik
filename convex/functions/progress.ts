@@ -4,23 +4,10 @@ import {
   computeMistakes,
   levenshtein,
 } from "../../src/lib/utils";
-import { Id } from "../_generated/dataModel";
-import { DatabaseReader, DatabaseWriter, mutation } from "../_generated/server";
+import { mutation } from "../_generated/server";
+import { getParticipant } from "./roundParticipants";
 
-async function getParticipant(
-  db: DatabaseReader | DatabaseWriter,
-  roundId: Id<"rounds">,
-  userId: Id<"users">,
-) {
-  return await db
-    .query("roundParticipants")
-    .withIndex("by_round_user", (q) =>
-      q.eq("roundId", roundId).eq("userId", userId),
-    )
-    .first();
-}
-
-// te funkcje są podobne, aczkolwiek updateProgress będzie wywoływane na bieżąco podczas pisania, a submitResult tylko raz, po zakończeniu rundy, więc warto je rozdzielić, aby uniknąć niepotrzebnych aktualizacji w trakcie pisania. Dodatkowo, submitResult przyjmuje finishedAt, które jest potrzebne do dokładnego obliczenia WPM po zakończeniu rundy.
+// te funkcje są podobne, aczkolwiek updateProgress będzie wywoływane na bieżąco podczas pisania, a submitResult tylko raz, po zakończeniu rundy, więc zostały rodzielone.
 
 export const updateProgress = mutation({
   args: {

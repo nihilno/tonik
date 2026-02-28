@@ -11,3 +11,10 @@ export type Round = {
   endsAt: number;
   startsAt: number;
 };
+
+export type Participant = {
+  name: string;
+  typedText: string;
+  wpm: number | null;
+  accuracy: number | null;
+};
