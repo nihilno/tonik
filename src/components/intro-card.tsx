@@ -18,7 +18,7 @@ function IntroCard() {
   useCheckStorage();
 
   return (
-    <Card className="text-center">
+    <Card className="text-center px-16">
       <CardHeader>
         <CardTitle className="font-light">
           <span className="text-xl">Welcome, {user?.name ?? "Guest"}</span>
